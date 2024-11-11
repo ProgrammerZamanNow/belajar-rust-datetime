@@ -4,8 +4,8 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    use chrono::{Datelike, Duration, FixedOffset, NaiveDate, NaiveDateTime, NaiveTime, TimeZone, Timelike};
-    use chrono_tz::Asia;
+    use chrono::{DateTime, Datelike, Duration, FixedOffset, Local, NaiveDate, NaiveDateTime, NaiveTime, TimeZone, Timelike, Utc};
+    use chrono_tz::{Asia, Tz};
 
     #[test]
     fn test_date(){
@@ -77,6 +77,21 @@ mod tests {
         let asia_jakarta_date_time = asia_jakarta.from_utc_datetime(&utc_date_time);
 
         println!("{}", utc_date_time);
+        println!("{}", asia_jakarta_date_time);
+    }
+
+    #[test]
+    fn test_date_time_with_time_zone(){
+        let utc_date_time: DateTime<Utc> = Utc::now();
+        let asia_jakarta_date_time : DateTime<Tz> = Asia::Jakarta.from_utc_datetime(&utc_date_time.naive_utc());
+
+        println!("{}", utc_date_time);
+        println!("{}", asia_jakarta_date_time);
+
+        let local_date_time: DateTime<Local> = Local::now();
+        let asia_jakarta_date_time: DateTime<Tz> = Asia::Jakarta.from_local_datetime(&local_date_time.naive_local()).unwrap();
+
+        println!("{}", local_date_time);
         println!("{}", asia_jakarta_date_time);
     }
 }
