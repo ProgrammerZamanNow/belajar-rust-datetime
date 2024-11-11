@@ -4,7 +4,7 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    use chrono::{Datelike, Duration, NaiveDate};
+    use chrono::{Datelike, Duration, NaiveDate, NaiveTime, Timelike};
 
     #[test]
     fn test_date(){
@@ -23,5 +23,15 @@ mod tests {
 
         println!("{}", date);
         println!("{}", new_date);
+    }
+
+    #[test]
+    fn test_time(){
+        let time: NaiveTime = NaiveTime::from_hms_milli_opt(10, 10, 10, 500).unwrap();
+
+        println!("{}", time.hour());
+        println!("{}", time.minute());
+        println!("{}", time.second());
+        println!("{}", time.nanosecond());
     }
 }
