@@ -109,4 +109,12 @@ mod tests {
         println!("{}", time.nanosecond());
         println!("{}", time.timezone());
     }
+
+    #[test]
+    fn test_format(){
+        let time = Local::now();
+        let formatted = time.format("%Y-%m-%d %H:%M:%S %z").to_string();
+
+        println!("{}", formatted);
+    }
 }
